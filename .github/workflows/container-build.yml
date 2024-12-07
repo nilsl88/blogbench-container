@@ -16,6 +16,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Install QEMU static binaries for multi-architecture support
+      - name: Install QEMU
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: all
+
       # Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
