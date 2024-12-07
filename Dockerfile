@@ -6,18 +6,19 @@ ENV BLOGBENCH_VERSION=1.2
 
 # Install build dependencies
 RUN apt-get update && apt-get -y dist-upgrade && \
-    apt-get install -y build-essential curl
+    apt-get install -y build-essential curl file
 
-# Add architecture-specific handling
-RUN case "$TARGETPLATFORM" in \
-    "linux/amd64") ARCH="x86_64" ;; \
-    "linux/arm64") ARCH="aarch64" ;; \
-    *) echo "Unsupported platform: $TARGETPLATFORM" && exit 1 ;; \
-    esac && \
-    cd /tmp/ && \
+# Print platform and architecture information
+RUN echo "TARGETPLATFORM: $TARGETPLATFORM" && \
+    echo "TARGETOS: $TARGETOS" && \
+    echo "TARGETARCH: $TARGETARCH" && \
+    echo "TARGETVARIANT: $TARGETVARIANT"
+
+# Build and install blogbench
+RUN cd /tmp/ && \
     curl -L "$BLOGBENCH_URL/blogbench-$BLOGBENCH_VERSION.tar.gz" | tar -xz && \
     cd "blogbench-$BLOGBENCH_VERSION" && \
-    ./configure --build="$ARCH-unknown-linux-gnu" && \
+    ./configure && \
     make && \
     make install-strip
 
