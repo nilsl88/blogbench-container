@@ -6,7 +6,10 @@ on:
       - main
   pull_request:
     branches:
-      - main
+    - main
+  # Run every 14 days at 00:00 UTC
+  schedule:
+    - cron: "0 0 */14 * *"
 
 jobs:
   build:
