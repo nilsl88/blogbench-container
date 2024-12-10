@@ -2,14 +2,8 @@ name: Build and Push container image
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-  # Run every 14 days at 00:00 UTC
-  schedule:
-    - cron: "0 0 */14 * *"
+    tags:
+      - v*
 
 jobs:
   build:
@@ -17,7 +11,7 @@ jobs:
     steps:
       # Checkout the repository
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Log in to Docker Hub or other container registry
       - name: Log in to Docker Hub
@@ -26,10 +20,17 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       # Build and push the Docker image
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
+          platforms: linux/amd64,linux/arm64
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/blogbench:1.2
+          tags: ${{ secrets.DOCKER_USERNAME }}/blogbench:latest
