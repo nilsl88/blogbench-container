@@ -35,5 +35,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/blogbench:1.2
 
+      # Always list Docker images even if a previous step fails
       - name: List Docker images
         run: docker images
+        if: always()  # Ensure this runs regardless of previous step status
