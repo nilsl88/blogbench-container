@@ -33,4 +33,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/blogbench:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/blogbench:1.2
