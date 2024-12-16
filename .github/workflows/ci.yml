@@ -10,7 +10,7 @@ on:
   # Run every 14 days at 00:00 UTC
   schedule:
     #- cron: "0 0 */14 * *"
-    - cron: "*/6 * * * *"
+    - cron: "*/10 * * * *"
 
 jobs:
   build-and-push:
