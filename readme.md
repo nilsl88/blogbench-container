@@ -4,6 +4,18 @@ Blogbench is a portable filesystem benchmark that tries to reproduce the load of
 
 It stresses the filesystem with multiple threads performing random reads, writes, and rewrites to get a realistic idea of the scalability and concurrency a system can handle.
 
+[![DockerHub](https://img.shields.io/badge/DockerHub-blue?logo=docker)](https://hub.docker.com/)
+![Docker Image Size](https://img.shields.io/docker/image-size/lundberg88/blogbench/latest?logo=docker&label=image%20size)
+
+The architectures supported by this image are:
+
+| Architecture | Available | Tag |
+| :----: | :----: | ---- |
+| x86-64 | ✅ | <version tag> |
+| arm64 | ✅ | <version tag> |
+| armhf | ❌ | |
+
+
 ### Sample Usage
 
 ```bash
