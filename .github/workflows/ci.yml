@@ -3,7 +3,14 @@ name: Build and Push Container Image
 on:
   push:
     branches:
-      - "main"
+      - main
+  pull_request:
+    branches:
+      - main
+  # Run every 14 days at 00:00 UTC
+  schedule:
+    #- cron: "0 0 */14 * *"
+    - cron: "4 * * * *"
 
 jobs:
   build-and-push:
@@ -22,7 +29,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: true
