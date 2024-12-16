@@ -4,28 +4,6 @@ Blogbench is a portable filesystem benchmark that tries to reproduce the load of
 
 It stresses the filesystem with multiple threads performing random reads, writes, and rewrites to get a realistic idea of the scalability and concurrency a system can handle.
 
-
-## Docker Image
-```bash
-# Stage 1: Builde
-FROM ubuntu:24.04 AS builder
-ENV DEBIAN_FRONTEND=noninteractive
-ENV BLOGBENCH_URL=https://download.pureftpd.org/pub/blogbench
-ENV BLOGBENCH_VERSION=1.2
-RUN apt-get update && apt-get -y dist-upgrade && apt-get install -y build-essential wget curl
-RUN cd /tmp/ && curl -L $BLOGBENCH_URL/blogbench-$BLOGBENCH_VERSION.tar.gz | tar -xz
-RUN cd /tmp/blogbench-$BLOGBENCH_VERSION && arch="$(uname -m)" && export arch && ./configure --build="${arch}" && make install-strip
-
-# Stage 2: Final
-FROM ubuntu:24.04
-MAINTAINER lundberg88
-WORKDIR /root
-COPY --from=builder /usr/local/bin/blogbench /usr/local/bin/blogbench
-COPY ./run.sh /root
-CMD ["/bin/bash"]
-ENTRYPOINT ["/root/run.sh"]
-```
-
 ### Sample Usage
 
 ```bash
@@ -45,13 +23,15 @@ docker run --rm \
 --sleep=<secs> (-s <secs>): delay after every iteration
 --writers=<n> (-w <n>): number of writers
 ```
+
+```bash
 By default:
 - **3 concurrent writers**  
 - **1 rewriter**  
 - **5 commenters**  
 - **100 readers**  
-- Runs for **30 iterations**.
-
+- Runs for **30 iterations**
+```
 
 ## See Homepage
 
