@@ -36,14 +36,13 @@ docker run --rm \
 --writers=<n> (-w <n>): number of writers
 ```
 
-```bash
 By default:
 - **3 concurrent writers**  
 - **1 rewriter**  
 - **5 commenters**  
 - **100 readers**  
 - Runs for **30 iterations**
-```
+
 
 ## See Homepage
 
