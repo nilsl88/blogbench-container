@@ -9,8 +9,7 @@ on:
       - main
   # Run every 14 days at 00:00 UTC
   schedule:
-   #- cron: "0 0 */14 * *"
-    - cron: "*/15 * * * *"
+    - cron: "0 0 */14 * *"
   workflow_dispatch:  # Manual trigger
 
 jobs:
