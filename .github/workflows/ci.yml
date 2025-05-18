@@ -7,9 +7,8 @@ on:
   pull_request:
     branches:
       - main
-  # Run every 14 days at 00:00 UTC
   schedule:
-    - cron: "0 0 */14 * *"
+    - cron: "0 0 1 * *"  # Monthly at midnight on the 1st
   workflow_dispatch:  # Manual trigger
 
 jobs:
