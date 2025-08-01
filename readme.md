@@ -1,6 +1,6 @@
 # Blogbench - A Filesystem Benchmark for Unix (Version 1.2)
 
-Blogbench is a portable filesystem benchmark that tries to reproduce the load of a real-world busy file server.
+Blogbench is a portable filesystem benchmark that tries to reproduce the load of a real-world busy file server. 
 
 It stresses the filesystem with multiple threads performing random reads, writes, and rewrites to get a realistic idea of the scalability and concurrency a system can handle.
 
